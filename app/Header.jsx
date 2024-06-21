@@ -34,7 +34,7 @@ const Header = () => {
   }));
 
   return (
-    <div className="navbar bg-base-100 border-b-2 shadow-md py-2 px-4">
+    <div className="navbar bg-base-100 border-b-2 shadow-md py-2 px-4 sticky top-0 z-10">
       <div className="navbar-start"></div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-3 flex items-center">

@@ -1,5 +1,6 @@
 import Header from "@/app/Header";
 import "./globals.css";
+import { Providers } from "./GlobalRedux/Provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,8 +23,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );
