@@ -6,6 +6,8 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
   const [theme, setTheme] = useState(() => {
@@ -14,6 +16,10 @@ const Header = () => {
     }
     return "light";
   });
+
+  const cart = useSelector(state => state.cart.products)
+
+  const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -39,7 +45,7 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-3 flex items-center">
           <li>
-            <Link href="#" className="hover:text-primary font-semibold">
+            <Link href="/" className="hover:text-primary font-semibold">
               Home
             </Link>
           </li>
@@ -50,12 +56,12 @@ const Header = () => {
           </li>
           <li>
             <Link
-              href="#"
+              href="/cart"
               className="hover:text-primary font-semibold"
             >
               <span>Cart</span>
               <IconButton className="p-0" aria-label="cart">
-                <StyledBadge badgeContent={1} color="primary">
+                <StyledBadge badgeContent={totalItems} color="primary">
                   <ShoppingCartIcon
                     className={`w-5 h-5 ${
                       theme === "light" ? "text-blue-500" : "text-gray-200"
