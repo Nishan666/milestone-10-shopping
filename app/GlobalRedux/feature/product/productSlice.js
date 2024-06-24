@@ -61,6 +61,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { setCategoryFilter, setTitleFilter, setPriceRangeFilter, resetProducts } = productSlice.actions;
+export const { setCategoryFilter, setTitleFilter, setPriceRangeFilter, resetProducts  } = productSlice.actions;
 
 export const productReducer = productSlice.reducer;

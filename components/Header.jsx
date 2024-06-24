@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
 
-
 const Header = () => {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
@@ -17,9 +16,17 @@ const Header = () => {
     return "light";
   });
 
-  const cart = useSelector(state => state.cart.products)
 
-  const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
+  const cart = useSelector((state) => state.cart.products);
+
+  console.log("cart", cart);
+
+  const totalItems = cart.reduce(
+    (total, product) => total + product.quantity,
+    0 
+  );
+
+  console.log(totalItems);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -55,17 +62,12 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="/cart"
-              className="hover:text-primary font-semibold"
-            >
+            <Link href="/cart" className="hover:text-primary font-semibold">
               <span>Cart</span>
               <IconButton className="p-0" aria-label="cart">
                 <StyledBadge badgeContent={totalItems} color="primary">
                   <ShoppingCartIcon
-                    className={`w-5 h-5 ${
-                      theme === "light" ? "text-blue-500" : "text-gray-200"
-                    }`}
+                    className={`w-5 h-5 text-gray-400`}
                   />
                 </StyledBadge>
               </IconButton>
@@ -75,7 +77,7 @@ const Header = () => {
       </div>
 
       <div className="navbar-end gap-3">
-        <button className="btn btn-primary btn-sm px-6 font-medium h-9 text-lg  hover:bg-primary-focus">
+        <button className="btn btn-primary bg-[#228be6] btn-sm px-6 font-semibold h-9 text-lg  hover:bg-primary-focus">
           Sign Up
         </button>
         <label className="swap swap-rotate">
