@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Providers } from "./GlobalRedux/Provider";
-import Header from "../components/Header";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("../components/Header"), { ssr: false });
 
 export const metadata = {
   title: "Create Next App",
@@ -24,6 +26,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Providers>
+          <Header />
           {children}
         </Providers>
       </body>

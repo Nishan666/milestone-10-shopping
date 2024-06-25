@@ -19,14 +19,10 @@ const Header = () => {
 
   const cart = useSelector((state) => state.cart.products);
 
-  console.log("cart", cart);
-
   const totalItems = cart.reduce(
     (total, product) => total + product.quantity,
     0 
   );
-
-  console.log(totalItems);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
