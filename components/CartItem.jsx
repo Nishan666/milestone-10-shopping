@@ -3,7 +3,7 @@
 import { fetchProductById } from "@/services/product";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import CartSkeleton from "./CartSkeleton";
+import CartSkeleton from "./skeleton/CartSkeleton";
 
 const CartItem = ({
   id,
@@ -23,13 +23,26 @@ const CartItem = ({
         setProduct(data);
       } catch (error) {
         setError(error.message);
+
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || {
+          products: [],
+        };
+        const updatedCartItems = cartItems.products.filter(
+          (item) => item.id !== id
+        );
+        localStorage.setItem(
+          "cart",
+          JSON.stringify({ products: updatedCartItems })
+        );
+
+        handleRemoveEntireProduct({ id });
       } finally {
         setLoading(false);
       }
     };
 
     getProduct();
-  }, [id]);
+  }, [handleRemoveEntireProduct, id]);
 
   if (loading) {
     return <CartSkeleton />;
@@ -57,10 +70,25 @@ const CartItem = ({
         </div>
       </div>
       <div className="flex gap-2 items-center">
-        <button className="btn btn-primary btn-sm bg-info border-none rounded-md hover:btn-error" onClick={()=>handleRemoveEntireProduct(product)}>Remove</button>
-        <button className="btn btn-primary btn-sm bg-info border-none rounded-md" onClick={()=>handleRemoveOneQuantity(product)}>-</button>
+        <button
+          className="btn btn-primary btn-sm bg-info border-none rounded-md hover:btn-error"
+          onClick={() => handleRemoveEntireProduct(product)}
+        >
+          Remove
+        </button>
+        <button
+          className="btn btn-primary btn-sm bg-info border-none rounded-md"
+          onClick={() => handleRemoveOneQuantity(product)}
+        >
+          -
+        </button>
         <span>{quantity}</span>
-        <button className="btn btn-primary btn-sm bg-info rounded-md border-none" onClick={()=>handleAddOneQuantity(product)}>+</button>
+        <button
+          className="btn btn-primary btn-sm bg-info rounded-md border-none"
+          onClick={() => handleAddOneQuantity(product)}
+        >
+          +
+        </button>
       </div>
     </div>
   );

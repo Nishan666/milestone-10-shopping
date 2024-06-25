@@ -11,18 +11,20 @@ import {
 import { fetchProductById } from "@/services/product";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useDebounce from "@/hooks/useDebounce";
 
 const Page = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.products);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(true);
+  const debouncedCartItems = useDebounce(cartItems, 1000);
 
   useEffect(() => {
     const calculateTotalPrice = async () => {
       setLoading(true);
       let total = 0;
-      for (const item of cartItems) {
+      for (const item of debouncedCartItems) {
         const product = await fetchProductById(item.id);
         total += product.price * item.quantity;
       }
@@ -31,7 +33,7 @@ const Page = () => {
     };
 
     calculateTotalPrice();
-  }, [cartItems]);
+  }, [debouncedCartItems]);
 
   const handleAddOneQuantity = (product) => {
     dispatch(addItem({ id: product.id, quantity: 1 }));
@@ -64,7 +66,7 @@ const Page = () => {
           <h2 className="my-6 font-medium text-xl">Total: ${totalPrice}</h2>
         )}
 
-        {loading && <Skeleton width={75} height={32} />}
+        {loading && <Skeleton width={75} height={15} className="my-8" />}
 
         <button className="btn btn-success">Checkout</button>
       </div>

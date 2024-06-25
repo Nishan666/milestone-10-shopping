@@ -6,7 +6,9 @@ import { fetchProducts } from "../../GlobalRedux/feature/product/productSlice";
 import { addItem } from "../../GlobalRedux/feature/cart/cartSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Product from "@/components/Product";
-import ProductSkeleton from "@/components/ProductSkeleton";
+import ProductSkeleton from "@/components/skeleton/ProductSkeleton";
+
+const OFFSET_SIZE = 9;
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const Page = () => {
   }, [status, dispatch, offset, filters]);
 
   const fetchMoreData = () => {
-    const newOffset = offset + 10;
+    const newOffset = offset + OFFSET_SIZE;
     setOffset(newOffset);
     dispatch(fetchProducts({ offset: newOffset, filters }));
   };
@@ -35,19 +37,25 @@ const Page = () => {
     <InfiniteScroll
       dataLength={products.length}
       next={fetchMoreData}
-      hasMore={(status !== "loading" && status !== "idle") ?  (products.length < 10 ? false : true) : true }
+      hasMore={
+        status !== "loading" && status !== "idle"
+          ? products.length < OFFSET_SIZE
+            ? false
+            : true
+          : true
+      }
       loader={
-        <div className="grid grid-cols-3 gap-6 ms-6 me-28">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <ProductSkeleton key={index} />
-          ))}
+        <div className="grid grid-cols-3 gap-6 ms-6 my-4 me-28">
+          {Array.from({ length: OFFSET_SIZE }).map(
+            (_, index) => (
+              <ProductSkeleton key={index} />
+            )
+          )}
         </div>
       }
-      endMessage={
-        <div></div>
-      }
+      endMessage={<div></div>}
     >
-      <div className="grid grid-cols-3 gap-6 ms-6 me-28">
+      <div className="grid grid-cols-3 gap-6 ms-6 my-2 me-28">
         {products.map((product, index) => (
           <Product
             key={index}

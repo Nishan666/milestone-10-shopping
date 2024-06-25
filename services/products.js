@@ -1,6 +1,6 @@
 export const fetchProductsFromAPI = async (offset, filters) => {
   const { category, title, priceRange } = filters;
-  let url = `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=20`;
+  let url = `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=9`;
   
   if (category) url += `&categoryId=${category}`;
   if (title) url += `&title=${title}`;

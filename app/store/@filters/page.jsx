@@ -14,6 +14,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import useDebounce from "@/hooks/useDebounce";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -23,26 +24,38 @@ const Page = () => {
   const [maxPrice, setMaxPrice] = useState(3000);
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const debouncedTitle = useDebounce(title, 1000);
+  const debouncedMinPrice = useDebounce(minPrice, 1000);
+  const debouncedMaxPrice = useDebounce(maxPrice, 1000);
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const applyFilters = () => {
-    dispatch(setTitleFilter(title));
+  useEffect(() => {
+    dispatch(setTitleFilter(debouncedTitle));
     dispatch(setCategoryFilter(selectedCategory));
-    dispatch(setPriceRangeFilter({ min: minPrice, max: maxPrice }));
+    dispatch(
+      setPriceRangeFilter({ min: debouncedMinPrice, max: debouncedMaxPrice })
+    );
     dispatch(resetProducts());
     dispatch(
       fetchProducts({
         offset: 0,
         filters: {
-          title,
+          title: debouncedTitle,
           category: selectedCategory,
-          priceRange: { min: minPrice, max: maxPrice },
+          priceRange: { min: debouncedMinPrice, max: debouncedMaxPrice },
         },
       })
     );
-  };
+  }, [
+    debouncedTitle,
+    selectedCategory,
+    debouncedMinPrice,
+    debouncedMaxPrice,
+    dispatch,
+  ]);
 
   const clearFilter = () => {
     setTitle("");
@@ -91,8 +104,8 @@ const Page = () => {
     <div className="py-0">
       <div className="px-4 pb-2 pt-0">
         <label className="label-text block text-sm font-medium">
-          <CategoryIcon className="w-4 h-4 text-stone-600 me-1"/>
-           Category
+          <CategoryIcon className="w-4 h-4 text-stone-600 me-1" />
+          Category
           <ul className="menu block w-full mt-1 p-0 m-0 text-sm font-medium shadow-sm border-0">
             <li
               onClick={() => setSelectedCategory("")}
@@ -141,7 +154,7 @@ const Page = () => {
       </div>
       <div className=" form-control px-4 py-2">
         <label className="label-text block text-sm font-medium ">
-          <LocalAtmIcon className="w-5 h-5 text-stone-600 me-1"/> Price Range:
+          <LocalAtmIcon className="w-5 h-5 text-stone-600 me-1" /> Price Range:
           <div className="flex flex-col space-y-2">
             <input
               type="number"
@@ -186,14 +199,7 @@ const Page = () => {
           </div>
         </label>
       </div>
-      <div className="px-4 py-4 flex justify-between gap-2">
-        <button
-          type="button"
-          onClick={applyFilters}
-          className="w-1/2 btn btn-primary font-bold rounded-lg text-sm px-4 btn-sm"
-        >
-          Apply Filters
-        </button>
+      <div className="px-4 py-4 flex justify-start gap-2">
         <button
           type="button"
           onClick={clearFilter}

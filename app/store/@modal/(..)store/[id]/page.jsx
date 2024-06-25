@@ -7,12 +7,18 @@ import React, { useEffect, useState } from "react";
 import TextTruncate from "react-text-truncate";
 import Image from "next/image";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ModalSkeleton from "@/components/skeleton/ModalSkeleton";
+import { useDispatch } from "react-redux";
+import { addItem } from "@/app/GlobalRedux/feature/cart/cartSlice";
+
 
 const Page = ({ params }) => {
   const id = params.id;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -29,8 +35,20 @@ const Page = ({ params }) => {
     getProduct();
   }, [id]);
 
+  const handleAddToCart = (product) => {
+    dispatch(addItem({ id: product.id, quantity: 1 }));
+  };
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <ProductModal>
+        <ModalSkeleton />
+      </ProductModal>
+    );
   }
 
   return (
