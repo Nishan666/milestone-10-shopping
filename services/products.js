@@ -4,7 +4,7 @@ export const fetchProductsFromAPI = async (offset, filters) => {
   
   if (category) url += `&categoryId=${category}`;
   if (title) url += `&title=${title}`;
-  if (priceRange.min && priceRange.max) url += `&price_min=${priceRange.min}&price_max=${priceRange.max}`;
+  if (priceRange.min || priceRange.max) url += `&price_min=${priceRange.min}&price_max=${priceRange.max}`;
 
   const response = await fetch(url);
   if (!response.ok) {

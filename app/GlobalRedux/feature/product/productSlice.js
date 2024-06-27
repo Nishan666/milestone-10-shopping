@@ -12,7 +12,7 @@ const initialState = {
     filters: {
         category: '',
         title: '',
-        priceRange: { min: 0, max: 1000 },
+        priceRange: { min: 0, max: 3000 },
     },
 };
 
