@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [theme, setTheme] = useState(() => {
@@ -16,12 +17,15 @@ const Header = () => {
     return "light";
   });
 
+  const pathname = usePathname();
+
+  console.log(pathname);
 
   const cart = useSelector((state) => state.cart.products);
 
   const totalItems = cart.reduce(
     (total, product) => total + product.quantity,
-    0 
+    0
   );
 
   useEffect(() => {
@@ -43,28 +47,41 @@ const Header = () => {
   }));
 
   return (
-    <div className="navbar bg-base-100 border-b-2 shadow-md py-2 px-4 sticky top-0 z-10">
+    <div className="navbar bg-base-100 border-b-2 shadow-md py-0 px-4 sticky top-0 z-10">
       <div className="navbar-start"></div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-3 flex items-center">
-          <li>
-            <Link href="/" className="hover:text-primary font-semibold">
+          <li
+            className={
+              pathname === "/" &&
+              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+            }
+          >
+            <Link href="/" className={"hover:text-primary font-semibold"}>
               Home
             </Link>
           </li>
-          <li>
+          <li
+            className={
+              pathname === "/store" &&
+              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+            }
+          >
             <Link href="/store" className="hover:text-primary font-semibold">
               Store
             </Link>
           </li>
-          <li>
+          <li
+            className={
+              pathname === "/cart" &&
+              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+            }
+          >
             <Link href="/cart" className="hover:text-primary font-semibold">
               <span>Cart</span>
               <IconButton className="p-0" aria-label="cart">
                 <StyledBadge badgeContent={totalItems} color="primary">
-                  <ShoppingCartIcon
-                    className={`w-5 h-5 text-gray-400`}
-                  />
+                  <ShoppingCartIcon className={`w-5 h-5 text-gray-400`} />
                 </StyledBadge>
               </IconButton>
             </Link>

@@ -14,6 +14,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import SearchIcon from "@mui/icons-material/Search";
 import useDebounce from "@/hooks/useDebounce";
 
 const Page = () => {
@@ -142,6 +143,7 @@ const Page = () => {
       </div>
       <div className="form-control px-4 pb-2 pt-2">
         <label className="label-text block text-sm mb-1 font-medium ">
+          <SearchIcon className="w-4 h-4 text-stone-600 me-1" />
           Search Product With Name
           <input
             type="text"

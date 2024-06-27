@@ -12,6 +12,7 @@ import { fetchProductById } from "@/services/product";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useDebounce from "@/hooks/useDebounce";
+import Link from "next/link";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,10 @@ const Page = () => {
 
         {loading && <Skeleton width={75} height={15} className="my-8" />}
 
-        <button className="btn btn-success">Checkout</button>
+        <Link href={"/checkout"}>
+          {" "}
+          <button className="btn btn-success">Checkout</button>
+        </Link>
       </div>
     </div>
   );

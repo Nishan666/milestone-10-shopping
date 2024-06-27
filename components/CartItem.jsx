@@ -79,10 +79,11 @@ const CartItem = ({
         <button
           className="btn btn-primary btn-sm bg-info border-none rounded-md"
           onClick={() => handleRemoveOneQuantity(product)}
+          disabled={quantity < 2 ? true : false}
         >
           -
         </button>
-        <span>{quantity}</span>
+        <span className="font-bold">{quantity}</span>
         <button
           className="btn btn-primary btn-sm bg-info rounded-md border-none"
           onClick={() => handleAddOneQuantity(product)}
