@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./GlobalRedux/Provider"
+import { Providers } from "./GlobalRedux/Provider";
 
 export const metadata = {
   title: "Create Next App",

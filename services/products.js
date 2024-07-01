@@ -12,3 +12,4 @@ export const fetchProductsFromAPI = async (offset, filters) => {
   }
   return response.json();
 };
+  

@@ -19,8 +19,6 @@ const Header = () => {
 
   const pathname = usePathname();
 
-  console.log(pathname);
-
   const cart = useSelector((state) => state.cart.products);
 
   const totalItems = cart.reduce(
