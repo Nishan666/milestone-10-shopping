@@ -77,9 +77,9 @@ const Header = () => {
           >
             <Link href="/cart" className="hover:text-primary font-semibold">
               <span>Cart</span>
-              <IconButton className="p-0" aria-label="cart">
-                <StyledBadge badgeContent={totalItems} color="primary">
-                  <ShoppingCartIcon className={`w-5 h-5 text-gray-400`} />
+              <IconButton sx={{ padding: 0 }} aria-label="cart">
+                <StyledBadge className="" badgeContent={totalItems} color="primary">
+                  <ShoppingCartIcon className={"text-gray-400"} sx={{ fontSize: 20 }}/>
                 </StyledBadge>
               </IconButton>
             </Link>

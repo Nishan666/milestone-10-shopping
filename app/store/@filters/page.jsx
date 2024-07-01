@@ -105,7 +105,7 @@ const Page = () => {
     <div className="py-0">
       <div className="px-4 pb-2 pt-0">
         <label className="label-text block text-sm font-medium">
-          <CategoryIcon className="w-4 h-4 text-stone-600 me-1" />
+          <CategoryIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }} />
           Category
           <ul className="menu block w-full mt-1 p-0 m-0 text-sm font-medium shadow-sm border-0">
             <li
@@ -143,7 +143,7 @@ const Page = () => {
       </div>
       <div className="form-control px-4 pb-2 pt-2">
         <label className="label-text block text-sm mb-1 font-medium ">
-          <SearchIcon className="w-4 h-4 text-stone-600 me-1" />
+          <SearchIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }}/>
           Search Product With Name
           <input
             type="text"
@@ -156,7 +156,7 @@ const Page = () => {
       </div>
       <div className=" form-control px-4 py-2">
         <label className="label-text block text-sm font-medium ">
-          <LocalAtmIcon className="w-5 h-5 text-stone-600 me-1" /> Price Range:
+          <LocalAtmIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }}/> Price Range:
           <div className="flex flex-col space-y-2">
             <input
               type="number"

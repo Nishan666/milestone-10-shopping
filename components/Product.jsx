@@ -56,7 +56,7 @@ const Product = ({ product, handleAddToCart }) => {
               onClick={handleClickRedirect}
               className="btn btn-xs btn-primary bg-[#15aabf] outline-0 border-0 p-0 m-0  rounded-md"
             >
-              <LaunchIcon className="w-4 h-4 p-0 mx-1" />
+              <LaunchIcon className="p-0 mx-1" sx={{ fontSize: 18 }} />
             </Link>
           )}
           <button
@@ -64,7 +64,7 @@ const Product = ({ product, handleAddToCart }) => {
             onClick={() => handleAddToCart(product)}
             className="btn btn-sm btn-primary border-0 bg-[#228be6]"
           >
-            <ShoppingCartIcon className="w-4 h-4 p-0 m-0" />
+            <ShoppingCartIcon sx={{ fontSize: 18 }}  />
             Add to Cart
           </button>
         </div>
