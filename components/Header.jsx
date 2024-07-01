@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <div className="navbar bg-base-100 border-b-2 shadow-md py-0 px-4 sticky top-0 z-10">
       <div className="navbar-start"></div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center flex">
         <ul className="menu menu-horizontal gap-3 flex items-center">
           <li
             className={
@@ -55,7 +55,7 @@ const Header = () => {
               `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
             }
           >
-            <Link href="/" className={"hover:text-primary font-semibold"}>
+            <Link href="/" className={"hover:text-primary font-semibold px-6"}>
               Home
             </Link>
           </li>
@@ -65,7 +65,7 @@ const Header = () => {
               `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
             }
           >
-            <Link href="/store" className="hover:text-primary font-semibold">
+            <Link href="/store" className="hover:text-primary font-semibold px-6">
               Store
             </Link>
           </li>

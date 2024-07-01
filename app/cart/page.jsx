@@ -71,7 +71,9 @@ const Page = () => {
 
         <Link href={"/checkout"}>
           {" "}
-          <button className="btn btn-success">Checkout</button>
+          <div className="w-full flex justify-end">
+            <button className="btn btn-sm btn-success ">Checkout</button>
+          </div>
         </Link>
       </div>
     </div>
