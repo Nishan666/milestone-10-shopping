@@ -12,13 +12,18 @@ const persistConfig = {
   storage,
 };
 
-// const reducer = combineReducers({
-//   product: productReducer,
-//   cart: cartReducer,
-// });
-
-const persistedReducer = persistReducer(persistConfig, cartReducer);
+const rootReducer = combineReducers({
+  product: productReducer,
+  cart: persistReducer(persistConfig, cartReducer),
+});
 
 export const store = configureStore({
-  reducer: { cart: persistedReducer, product: productReducer },
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredPaths: ["register"],
+      },
+    }),
 });

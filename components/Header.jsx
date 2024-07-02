@@ -21,10 +21,12 @@ const Header = () => {
 
   const cart = useSelector((state) => state.cart.products);
 
-  const totalItems = cart.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+  const totalItems = cart.length
+
+  // const totalItems = cart.reduce(
+  //   (total, product) => total + product.quantity,
+  //   0
+  // );
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -51,8 +53,11 @@ const Header = () => {
         <ul className="menu menu-horizontal gap-3 flex items-center">
           <li
             className={
-              pathname === "/" &&
-              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+              pathname === "/"
+                ? `${
+                    theme === "light" ? "bg-gray-200" : "bg-gray-700"
+                  } rounded-md`
+                : undefined
             }
           >
             <Link href="/" className={"hover:text-primary font-semibold px-6"}>
@@ -61,25 +66,41 @@ const Header = () => {
           </li>
           <li
             className={
-              pathname === "/store" &&
-              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+              pathname === "/store"
+                ? `${
+                    theme === "light" ? "bg-gray-200" : "bg-gray-700"
+                  } rounded-md`
+                : undefined
             }
           >
-            <Link href="/store" className="hover:text-primary font-semibold px-6">
+            <Link
+              href="/store"
+              className="hover:text-primary font-semibold px-6"
+            >
               Store
             </Link>
           </li>
           <li
             className={
-              pathname === "/cart" &&
-              `${theme === "light" ? "bg-gray-200" : "bg-gray-700"} rounded-md`
+              pathname === "/cart"
+                ? `${
+                    theme === "light" ? "bg-gray-200" : "bg-gray-700"
+                  } rounded-md`
+                : undefined
             }
           >
             <Link href="/cart" className="hover:text-primary font-semibold">
               <span>Cart</span>
               <IconButton sx={{ padding: 0 }} aria-label="cart">
-                <StyledBadge className="" badgeContent={totalItems} color="primary">
-                  <ShoppingCartIcon className={"text-gray-400"} sx={{ fontSize: 20 }}/>
+                <StyledBadge
+                  className=""
+                  badgeContent={totalItems}
+                  color="primary"
+                >
+                  <ShoppingCartIcon
+                    className={"text-gray-400"}
+                    sx={{ fontSize: 20 }}
+                  />
                 </StyledBadge>
               </IconButton>
             </Link>

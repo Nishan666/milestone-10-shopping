@@ -105,7 +105,10 @@ const Page = () => {
     <div className="py-0">
       <div className="px-4 pb-2 pt-0">
         <label className="label-text block text-sm font-medium">
-          <CategoryIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }} />
+          <CategoryIcon
+            className=" text-stone-600 me-1"
+            sx={{ fontSize: 20 }}
+          />
           Category
           <ul className="menu block w-full mt-1 p-0 m-0 text-sm font-medium shadow-sm border-0">
             <li
@@ -143,7 +146,7 @@ const Page = () => {
       </div>
       <div className="form-control px-4 pb-2 pt-2">
         <label className="label-text block text-sm mb-1 font-medium ">
-          <SearchIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }}/>
+          <SearchIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }} />
           Search Product With Name
           <input
             type="text"
@@ -156,12 +159,22 @@ const Page = () => {
       </div>
       <div className=" form-control px-4 py-2">
         <label className="label-text block text-sm font-medium ">
-          <LocalAtmIcon className=" text-stone-600 me-1" sx={{ fontSize: 20 }}/> Price Range:
+          <LocalAtmIcon
+            className=" text-stone-600 me-1"
+            sx={{ fontSize: 20 }}
+          />{" "}
+          Price Range:
           <div className="flex flex-col space-y-2">
             <input
               type="number"
               value={minPrice}
-              onChange={(e) => setMinPrice(parseFloat(e.target.value))}
+              onChange={(e) => {
+                let value = parseFloat(e.target.value) || 0;
+                if (value > 1) {
+                  value = value.toString().replace(/^0+/, "");
+                }
+                setMinPrice(value);
+              }}
               onBlur={handleMinPriceBlur}
               className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full p-2 text-sm input input-bordered input-sm mt-2"
               placeholder="Min Price"
@@ -181,7 +194,13 @@ const Page = () => {
             <input
               type="number"
               value={maxPrice}
-              onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
+              onChange={(e) => {
+                let value = parseFloat(e.target.value) || 0;
+                if (value > 1) {
+                  value = value.toString().replace(/^0+/, "");
+                }
+                setMaxPrice(value);
+              }}
               onBlur={handleMaxPriceBlur}
               className="my-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none block w-full p-2 text-sm input input-bordered input-sm"
               placeholder="Max Price"

@@ -20,22 +20,13 @@ const CartItem = ({
     const getProduct = async () => {
       try {
         const data = await fetchProductById(id);
-        setProduct(data);
+        if (!data) {
+          handleRemoveEntireProduct({ id: id });
+        } else {
+          setProduct(data);
+        }
       } catch (error) {
         setError(error.message);
-
-        const cartItems = JSON.parse(localStorage.getItem("cart")) || {
-          products: [],
-        };
-        const updatedCartItems = cartItems.products.filter(
-          (item) => item.id !== id
-        );
-        localStorage.setItem(
-          "cart",
-          JSON.stringify({ products: updatedCartItems })
-        );
-
-        handleRemoveEntireProduct({ id });
       } finally {
         setLoading(false);
       }

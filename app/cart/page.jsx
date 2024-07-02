@@ -27,7 +27,9 @@ const Page = () => {
       let total = 0;
       for (const item of debouncedCartItems) {
         const product = await fetchProductById(item.id);
-        total += product.price * item.quantity;
+        if (product) {
+          total += product.price * item.quantity;
+        }
       }
       setTotalPrice(total);
       setLoading(false);
@@ -71,8 +73,8 @@ const Page = () => {
 
         <Link href={"/checkout"}>
           {" "}
-          <div className="w-full flex justify-end">
-            <button className="btn btn-sm btn-success ">Checkout</button>
+          <div className="w-full flex justify-start">
+            <button className="btn btn-success ">Checkout</button>
           </div>
         </Link>
       </div>
