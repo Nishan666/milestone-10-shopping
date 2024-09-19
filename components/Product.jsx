@@ -20,7 +20,7 @@ const Product = ({ product, handleAddToCart }) => {
       <figure className="overflow-hidden rounded-t-lg">
         <Image
           src={
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
           }
           alt={product.title}
           width={100}

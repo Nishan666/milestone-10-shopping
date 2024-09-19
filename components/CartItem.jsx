@@ -49,7 +49,7 @@ const CartItem = ({
         <Image
           className="object-cover h-24 w-24 rounded-sm"
           src={
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
           }
           width={100}
           height={100}

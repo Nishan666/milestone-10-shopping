@@ -22,7 +22,7 @@ const Page = () => {
             <div className="mt-10">
               <Image
                 className="mx-auto h-72 w-1/2 object-cover rounded-lg shadow-md"
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 alt="Shopping"
                 width={1000}
                 height={1000}
