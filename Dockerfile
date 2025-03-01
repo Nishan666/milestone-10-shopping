@@ -12,6 +12,7 @@ RUN npm install
 COPY . .
 
 # Build the Next.js application
+ENV NEXT_IGNORE_SWCPACKAGE=1
 RUN npm run build
 
 # Use a lightweight Node.js image for production
